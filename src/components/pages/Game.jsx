@@ -6,7 +6,7 @@ import { randomColors, vertical, horizontal, validation, value } from '../../scr
 const Game = () => {
     const { mis, setmis, difficulty, puzzledgrid, solvedgrid } = useContext(mistakes)
     const [seconds, setseconds] = useState(0)
-
+    const [warning, setwarning] = useState("")
 
     useEffect(() => {
         randomColors();
@@ -29,7 +29,12 @@ const Game = () => {
             value.innerText = digit;
             setmis(mis + 1)
         } else {
-            console.log("the cell is already filled");
+        setwarning("The cell is already filled");
+        const warn = setInterval(() => {
+                setwarning("")
+        }, 3000);
+
+        return () => clearInterval(warn);
         }
     };
 
@@ -49,6 +54,7 @@ const Game = () => {
             <div id="main">
 
                 <div id="main-grid">
+                    <h1 className='w-full flex justify-center'>{warning}</h1>
                     <div id="upper-container">
                         <p>Difficulty : {difficulty}</p>
                         <p>Mistakes : {mis} / 3</p>
