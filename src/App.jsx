@@ -9,13 +9,14 @@ import { mistakes } from './components/contexts/Mycontext.jsx'
 
 const App = () => {
   const [mis, setmis] = useState(0)
+  const [mode, setmode] = useState(null)
 
   return (
-    <mistakes.Provider value={{ mis, setmis, difficulty, puzzledgrid, solvedgrid }}>
+    <mistakes.Provider value={{ mis, setmis, mode, setmode, difficulty, puzzledgrid, solvedgrid }}>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/game" element={<Game />} />
+        <Route path="/game/:mode" element={<Game />} />
       </Routes>
     </BrowserRouter>
     </mistakes.Provider>
